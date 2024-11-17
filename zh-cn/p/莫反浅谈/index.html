@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言 集训的时候讲了子集反演，于是想了解一下其他的反演，便去学了莫反。于是想写一篇讲解，顺便来巩固一下，加深一下理解。\n前置知识 艾弗森括号 $\\left[P\\right]=\\begin{cases}1\\ \\ \\ P\\ is\\ true \\ 0\\ \\ \\ Otherwise\\end{cases}$ 相当于强转 $bool$ 类型的一个括号。\n数论分块 快速求解的工具，这里不展开讲解了，详解见数论分块 by: mango09\n积性函数 定义 满足 $f(xy)=f(x)f(y)$ 的函数称为积性函数。\n常见的几种积性函数 $I(n)=1$ $e(n)=\\left[n=1\\right]$ $\\mathrm{Id}_k(n)=n^k，通常 \\mathrm{Id}_1(n)记为\\mathrm{Id}(n)$ $d(n)=\\sum\\limits_{d|n}1$ 即 $n$ 的因数个数 $\\sigma_k(n)=\\sum\\limits_{d|n}{d^k}$ $\\quad \\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad$ 特别的，$k=0$ 时，为因子个数，即 $d(n)$ $\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad$ $\\quad \\quad \\ \\ $，$ k=1$ 时，为因子和，通常记为 $\\sigma(n)$ 欧拉函数 $\\varphi(n)=\\sum\\limits_{i=1}^n\\left[\\gcd(i,n)=1\\right]$ 莫比乌斯函数 下面有定义 莫比乌斯函数 $\\ $\n定义 $\\ $\n上面已经提到了莫比乌斯函数 $\\mu$ 的定义，这里再解释一下。第一种情况对应的就是 $\\mu(1)=1$，第二种情况的意思是 $n\\ =\\ \\prod\\limits_{p_i|n}{{p_i}^{c_i}}$。其中，$p_i$ 均为质数。显然对于所有 $n$，都能写成这样的形式（即分解质因数）。若 $\\exists\\ c_i&gt;1$ 则 $\\mu(n)=0$。否则 $\\mu(n)\\ =\\ (-1)^k$，其中 $k$ 为 $n$ 的质因子个数。\n">
+<title>莫反浅谈</title>
+
+<link rel='canonical' href='http://localhost:1313/zh-cn/p/%E8%8E%AB%E5%8F%8D%E6%B5%85%E8%B0%88/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="莫反浅谈">
+<meta property='og:description' content="前言 集训的时候讲了子集反演，于是想了解一下其他的反演，便去学了莫反。于是想写一篇讲解，顺便来巩固一下，加深一下理解。\n前置知识 艾弗森括号 $\\left[P\\right]=\\begin{cases}1\\ \\ \\ P\\ is\\ true \\ 0\\ \\ \\ Otherwise\\end{cases}$ 相当于强转 $bool$ 类型的一个括号。\n数论分块 快速求解的工具，这里不展开讲解了，详解见数论分块 by: mango09\n积性函数 定义 满足 $f(xy)=f(x)f(y)$ 的函数称为积性函数。\n常见的几种积性函数 $I(n)=1$ $e(n)=\\left[n=1\\right]$ $\\mathrm{Id}_k(n)=n^k，通常 \\mathrm{Id}_1(n)记为\\mathrm{Id}(n)$ $d(n)=\\sum\\limits_{d|n}1$ 即 $n$ 的因数个数 $\\sigma_k(n)=\\sum\\limits_{d|n}{d^k}$ $\\quad \\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad$ 特别的，$k=0$ 时，为因子个数，即 $d(n)$ $\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad$ $\\quad \\quad \\ \\ $，$ k=1$ 时，为因子和，通常记为 $\\sigma(n)$ 欧拉函数 $\\varphi(n)=\\sum\\limits_{i=1}^n\\left[\\gcd(i,n)=1\\right]$ 莫比乌斯函数 下面有定义 莫比乌斯函数 $\\ $\n定义 $\\ $\n上面已经提到了莫比乌斯函数 $\\mu$ 的定义，这里再解释一下。第一种情况对应的就是 $\\mu(1)=1$，第二种情况的意思是 $n\\ =\\ \\prod\\limits_{p_i|n}{{p_i}^{c_i}}$。其中，$p_i$ 均为质数。显然对于所有 $n$，都能写成这样的形式（即分解质因数）。若 $\\exists\\ c_i&gt;1$ 则 $\\mu(n)=0$。否则 $\\mu(n)\\ =\\ (-1)^k$，其中 $k$ 为 $n$ 的质因子个数。\n">
+<meta property='og:url' content='http://localhost:1313/zh-cn/p/%E8%8E%AB%E5%8F%8D%E6%B5%85%E8%B0%88/'>
+<meta property='og:site_name' content='演示站点'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-17T17:34:04&#43;08:00'/><meta property='article:modified_time' content='2024-11-17T17:34:04&#43;08:00'/>
+<meta name="twitter:title" content="莫反浅谈">
+<meta name="twitter:description" content="前言 集训的时候讲了子集反演，于是想了解一下其他的反演，便去学了莫反。于是想写一篇讲解，顺便来巩固一下，加深一下理解。\n前置知识 艾弗森括号 $\\left[P\\right]=\\begin{cases}1\\ \\ \\ P\\ is\\ true \\ 0\\ \\ \\ Otherwise\\end{cases}$ 相当于强转 $bool$ 类型的一个括号。\n数论分块 快速求解的工具，这里不展开讲解了，详解见数论分块 by: mango09\n积性函数 定义 满足 $f(xy)=f(x)f(y)$ 的函数称为积性函数。\n常见的几种积性函数 $I(n)=1$ $e(n)=\\left[n=1\\right]$ $\\mathrm{Id}_k(n)=n^k，通常 \\mathrm{Id}_1(n)记为\\mathrm{Id}(n)$ $d(n)=\\sum\\limits_{d|n}1$ 即 $n$ 的因数个数 $\\sigma_k(n)=\\sum\\limits_{d|n}{d^k}$ $\\quad \\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad$ 特别的，$k=0$ 时，为因子个数，即 $d(n)$ $\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad\\quad$ $\\quad \\quad \\ \\ $，$ k=1$ 时，为因子和，通常记为 $\\sigma(n)$ 欧拉函数 $\\varphi(n)=\\sum\\limits_{i=1}^n\\left[\\gcd(i,n)=1\\right]$ 莫比乌斯函数 下面有定义 莫比乌斯函数 $\\ $\n定义 $\\ $\n上面已经提到了莫比乌斯函数 $\\mu$ 的定义，这里再解释一下。第一种情况对应的就是 $\\mu(1)=1$，第二种情况的意思是 $n\\ =\\ \\prod\\limits_{p_i|n}{{p_i}^{c_i}}$。其中，$p_i$ 均为质数。显然对于所有 $n$，都能写成这样的形式（即分解质因数）。若 $\\exists\\ c_i&gt;1$ 则 $\\mu(n)=0$。否则 $\\mu(n)\\ =\\ (-1)^k$，其中 $k$ 为 $n$ 的质因子个数。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/zh-cn/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu13739649187745961479.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/zh-cn">演示站点</a></h1>
+            <h2 class="site-description">演示说明</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/zh-cn/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/zh-cn/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" >English</option>
+                                
+                                    <option value="http://localhost:1313/zh-cn/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#艾弗森括号">艾弗森括号</a></li>
+        <li><a href="#数论分块">数论分块</a></li>
+        <li><a href="#积性函数">积性函数</a>
+          <ol>
+            <li><a href="#定义">定义</a></li>
+            <li><a href="#常见的几种积性函数">常见的几种积性函数</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#莫比乌斯函数"><strong>莫比乌斯函数</strong></a>
+      <ol>
+        <li><a href="#定义-1"><strong>定义</strong></a></li>
+        <li><a href="#性质"><strong>性质</strong></a></li>
+        <li><a href="#求莫比乌斯函数"><strong>求莫比乌斯函数</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#狄利克雷-dirichlet-卷积">狄利克雷 $(Dirichlet)$ 卷积</a>
+      <ol>
+        <li><a href="#定义-2"><strong>定义</strong></a></li>
+        <li><a href="#性质-1"><strong>性质</strong></a></li>
+        <li><a href="#常见积性函数与狄利克雷卷积的性质"><strong>常见积性函数与狄利克雷卷积的性质</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#三莫比乌斯反演">三、莫比乌斯反演</a>
+      <ol>
+        <li><a href="#结论1"><strong>结论1</strong></a></li>
+        <li><a href="#结论2"><strong>结论2</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#四套路和一些例题"><strong>四、套路和一些例题</strong></a>
+      <ol>
+        <li><a href="#套路"><strong>套路</strong></a></li>
+        <li><a href="#例题1"><strong>例题1</strong></a></li>
+        <li><a href="#例题2"><strong>例题2</strong></a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/zh-cn/p/%E8%8E%AB%E5%8F%8D%E6%B5%85%E8%B0%88/">莫反浅谈</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 17, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="前言"><em>前言</em>
+</h1><p>集训的时候讲了子集反演，于是想了解一下其他的反演，便去学了莫反。于是想写一篇讲解，顺便来巩固一下，加深一下理解。</p>
+<h1 id="前置知识"><em>前置知识</em>
+</h1><h3 id="艾弗森括号">艾弗森括号
+</h3><p>$\left[P\right]=\begin{cases}1\ \  \ P\ is\ true \   0\ \ \ Otherwise\end{cases}$ 相当于强转 $bool$ 类型的一个括号。</p>
+<h3 id="数论分块">数论分块
+</h3><p>快速求解的工具，这里不展开讲解了，详解见<a class="link" href="https://www.cnblogs.com/mangoworld/p/Number-Theory-Block.html"  target="_blank" rel="noopener"
+    >数论分块 by: mango09</a></p>
+<h3 id="积性函数">积性函数
+</h3><h4 id="定义">定义
+</h4><p>满足 $f(xy)=f(x)f(y)$ 的函数称为积性函数。</p>
+<h4 id="常见的几种积性函数">常见的几种积性函数
+</h4><ol>
+<li>$I(n)=1$</li>
+<li>$e(n)=\left[n=1\right]$</li>
+<li>$\mathrm{Id}_k(n)=n^k，通常 \mathrm{Id}_1(n)记为\mathrm{Id}(n)$</li>
+<li>$d(n)=\sum\limits_{d|n}1$ 即 $n$ 的因数个数</li>
+<li>$\sigma_k(n)=\sum\limits_{d|n}{d^k}$
+$\quad \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$ 特别的，$k=0$ 时，为因子个数，即 $d(n)$
+$\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$ $\quad \quad \ \ $，$ k=1$ 时，为因子和，通常记为 $\sigma(n)$</li>
+<li>欧拉函数 $\varphi(n)=\sum\limits_{i=1}^n\left[\gcd(i,n)=1\right]$</li>
+<li>莫比乌斯函数 <del>下面有定义</del></li>
+</ol>
+<hr>
+<h2 id="莫比乌斯函数"><strong>莫比乌斯函数</strong>
+</h2><p>$\ $</p>
+<h3 id="定义-1"><strong>定义</strong>
+</h3><p>$\ $</p>
+<p>上面已经提到了莫比乌斯函数 $\mu$ 的定义，这里再解释一下。第一种情况对应的就是 $\mu(1)=1$，第二种情况的意思是 $n\ =\ \prod\limits_{p_i|n}{{p_i}^{c_i}}$。其中，$p_i$ 均为质数。显然对于所有 $n$，都能写成这样的形式（即分解质因数）。若 $\exists\ c_i&gt;1$ 则 $\mu(n)=0$。否则 $\mu(n)\ =\ (-1)^k$，其中 $k$ 为 $n$ 的质因子个数。</p>
+<hr>
+<h3 id="性质"><strong>性质</strong>
+</h3>$$ \sum\limits_{d|n}\mu(d)=\left[n=1\right]$$<p>
+$\qquad$ 让我们来简单证明一下，首先对于 $n=1$ 时，那么显然这个式子成立。再来考虑 $n&gt;1$ 时，我们令  $n\ =\ \prod\limits_{p_i|n}{{p_i}^{c_i}}$。其中，$p_i$ 均为质数。那么 $n$ 的因子相当于在这些 $p$ 中任选几个相乘。显然当某个 $p_i$ 选了多次时，那么 $\mu(d)=0$，我们不做考虑。这样我们就能把左边的和式变成 $\sum\limits_{i=0}^k{C_k^i}\times(-1)^{i}=\sum\limits_{i=0}^k{C_k^i}\times(-1)^i\times1^{k-i}$，由二项式定理得，这个式子就是 $(-1+1)^k=0$，得证！</p>
+<hr>
+<h3 id="求莫比乌斯函数"><strong>求莫比乌斯函数</strong>
+</h3><p>$\ $</p>
+<p>因为莫比乌斯函数是积性函数，所以我们可以用线性筛来求。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">primes</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">mu</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">bitset</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="n">st</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Prime</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">primes</span><span class="p">[</span><span class="o">++</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">;</span><span class="o">++</span><span class="n">j</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=-</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="狄利克雷-dirichlet-卷积">狄利克雷 $(Dirichlet)$ 卷积
+</h2><h3 id="定义-2"><strong>定义</strong>
+</h3><p>定义两个数论函数（$f,g$）的狄利克雷卷积为：
+</p>
+$$\\ (f*g)(n)=\sum\limits_{d|n}f(d)g(\frac{n}{d})$$<hr>
+<h3 id="性质-1"><strong>性质</strong>
+</h3><ol>
+<li>满足交换律($f<em>g=g</em>f$)，结合律$(f<em>g</em>h=f*(g<em>h))$，分配律$(f</em>(g+h)=f<em>g+f</em>h)$</li>
+<li>任何数论函数卷上单位函数 $e$ 都为它本身，即 $(f*e)(n)=f(n)$</li>
+<li>两个积性函数 $f,g$ 卷积后，仍为积性函数，即 $f*g$ 为积性函数。</li>
+</ol>
+<hr>
+<h3 id="常见积性函数与狄利克雷卷积的性质"><strong>常见积性函数与狄利克雷卷积的性质</strong>
+</h3><hr>
+<p><strong>1. 关于单位函数</strong>
+</p>
+$$e=\mu *I=\sum\limits_{d|n}\mu(d)$$<p>
+$\quad$ 证明：</p>
+<p>$\qquad\qquad$ 我们前面已经证过 $\sum\limits_{d|n}\mu(d)=\left[n=1\right]$，而单位函数 $e=\left[n=1\right]$。得证！</p>
+<p>通过这个性质，我们也能知道，$\mu$ 其实就是 $I$ 的逆。</p>
+<hr>
+<p><strong>2. 关于欧拉函数</strong>
+</p>
+$$\varphi * I=\mathrm{Id}$$$$\\ \varphi=\mathrm{Id}*\mu$$<p>
+证明：</p>
+<p>$\qquad\qquad$ 第一个性质展开之后就是 $\sum\limits_{d|n}\varphi(d)=n$。我们设 $f(x)=\sum\limits_{i=1}^n{\left[\gcd(i,n)=x\right]}$ 那么显然，$n=\sum\limits_{i=1}^nf(i)$，而 $f(x)=\varphi(\frac{n}{x})$，所以 $n=\sum\limits_{d|n}\varphi(\frac{n}{d})$ 同时 $n$ 的因子又满足对称性，所以就能得到 $n=\sum\limits_{d|n}\varphi(d)$。</p>
+<p>$\qquad\qquad$ 对于第二个性质，我们在第一个式子的基础上，两边同时卷上 $\mu$，则左边为 $\varphi* I * \mu=\varphi * e=\varphi$，右边为 $\mathrm{Id}*\mu$，得证！</p>
+<hr>
+<p><strong>3. 关于幂函数</strong>  <strong>和除数函数</strong></p>
+$$\mathrm{Id}_k*I=\sigma_k$$<p>证明：</p>
+<p>左边展开后为 $\sum\limits_{d|n}{d^k}$，等于右边，得证！</p>
+<hr>
+<h2 id="三莫比乌斯反演">三、莫比乌斯反演
+</h2><h3 id="结论1"><strong>结论1</strong>
+</h3><p>若有两个数论函数 $f,g$，且满足
+</p>
+$$f=g*I$$<p>
+则有
+</p>
+$$g=f*\mu$$<p>
+证明：证明很好证，就是将第一个式子带入到第二个式子中看是否成立，即 $g=g<em>I</em>\mu=g*(\mu<em>I)=g</em>e=g$，得证！另外提一嘴，这两个命题是充要的，证明与其类似。</p>
+<hr>
+<h3 id="结论2"><strong>结论2</strong>
+</h3>$$\left[\gcd(i,j)=1\right]=\sum\limits_{d|\gcd(i,j)}\mu(d)$$<p>
+感觉好像是废话，其实就是上面的莫比乌斯函数的性质将 $\gcd(i,j)$ 带入到那里的 $n$ 而已，不再证明。</p>
+<h2 id="四套路和一些例题"><strong>四、套路和一些例题</strong>
+</h2><p><del>感觉莫反的题大部分和最大公约数求和有关</del></p>
+<hr>
+<h3 id="套路"><strong>套路</strong>
+</h3><p>求：</p>
+$$\sum\limits_{i=1}^n\sum\limits_{j=1}^mf(\gcd(i,j))$$<p>设 $f=g*I=\sum\limits_{d|n}g(d)$
+则原式化为
+</p>
+$$\sum\limits_{i=1}^n\sum\limits_{j=1}^m\sum\limits_{d|\gcd(i,j)}g(d)$$<p>
+变化一下求和顺序，先枚举 $d$，因为 $d|\gcd(i,j)$，所以$d|i$ 且 $d|j$，则原式变为
+</p>
+$$\sum\limits_{d=1}^{min(n,m)} \left\lfloor\dfrac{n}{d}\right\rfloor \left\lfloor\dfrac{m}{d}\right\rfloor g(d)$$<blockquote>
+<p>$\dag$：这一步式子好像解释的不是很清晰，我再解释一下。首先先来看原来的式子，若有一个 $d$ 使得 $d|i$ 且 $d|j$，那么 $d$ 在 $n$ 中会计算 $\left\lfloor\dfrac{n}{d}\right\rfloor$ 次（即 $d$ 的倍数次），在 $m$ 中同理，会计算 $\left\lfloor\dfrac{m}{d}\right\rfloor$ 次。用乘法原理对于每一个 $d$ 都会计算 $\left\lfloor\dfrac{m}{d}\right\rfloor\times\left\lfloor\dfrac{n}{d}\right\rfloor$ 次，再乘上 $g(d)$，就能得出来这个式子了。</p>
+</blockquote>
+<p>若我们知道了 $g$ 的所有取值，那么我们就可以用数论分块求解了。所以，现在我们的主要问题变成了求解 $g$。这就可以用莫比乌斯反演了，由莫比乌斯反演得 $g=\mu *f$。$g$ 是一个积性函数,所以也可以用线性筛求解。</p>
+<hr>
+<h3 id="例题1"><strong>例题1</strong>
+</h3><p>求：
+</p>
+$$\sum\limits_{i=1}^n\sum\limits_{j=1}^m \gcd(i,j)$$<p>
+要求这个，就是求
+</p>
+$$\sum\limits_{i=1}^n\sum\limits_{j=1}^m\mathrm{Id}(\gcd(i,j))$$<p>
+那上面的 $g=Id*\mu=\varphi$,所以答案就是
+</p>
+$$\sum\limits_{d=1}^{min(n,m)} \left\lfloor\dfrac{n}{d}\right\rfloor \left\lfloor\dfrac{m}{d}\right\rfloor \varphi(d)$$<p>
+实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">primes</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">bitset</span><span class="o">&lt;</span><span class="n">N</span><span class="o">&gt;</span><span class="n">st</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">phi</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="err">，</span><span class="n">sum</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Prime</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="c1">//处理欧拉函数和前缀和
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">primes</span><span class="p">[</span><span class="o">++</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">;</span><span class="o">++</span><span class="n">j</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">phi</span><span class="p">[</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">solve</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">){</span><span class="c1">//数论分块求解
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="n">m</span><span class="p">)</span> <span class="n">swap</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span><span class="o">=</span><span class="n">MIN</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">l</span><span class="p">),</span><span class="n">m</span><span class="o">/</span><span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="n">l</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="o">+=</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span><span class="o">=</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="例题2"><strong>例题2</strong>
+</h3><p>求：
+</p>
+$$\sum\limits_{i=1}^n \sum\limits_{j=1}^m \left[\gcd(i,j)=1\right]$$<p>
+这就可以用到我们上面提到的莫比乌斯反演结论2了，则原式化为
+</p>
+$$\sum\limits_{i=1}^n \sum\limits_{j=1}^m\sum\limits_{d|\gcd(i,j)}\mu(d)$$<p>
+还是和上面一样的变换一下求和顺序，得到
+</p>
+$$\sum\limits_{d=1}^{min(n,m)}\left\lfloor \frac{n}{d}\right\rfloor\left\lfloor \frac{m}{d}\right\rfloor\mu(d)$$<p>
+与例题1类似的求法，不再放code。</p>
+<hr>
+<h1 id="特别鸣谢"><em>特别鸣谢</em>
+</h1><p><a class="link" href="https://www.luogu.com.cn/user/717063"  target="_blank" rel="noopener"
+    ><img src="https://s21.ax1x.com/2024/08/18/pAPe8dH.webp"
+	
+	
+	
+	loading="lazy"
+	
+		alt="qiliu"
+	
+	
+>$\ \quad$@qiliu $\ \quad$</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 Example Person
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.945f6df2b609892f53179a804e6b1c9991c38a8f557d981e61355cf37c959d1c.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
