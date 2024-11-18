@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><script src="//livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=/livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="A - 123233 题意 给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。\n解法 暗照题意模拟即可\nB - Hurdle Parsing 题意 有一个长度为 $N$ ( $N \\ge 1$ ) 的正整数序列 $A = (A_1, A_2, \\dots, A_N)$ 。\n她用 $A$ 生成了如下字符串 $S$ ：\n">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="A - 123233 题意 给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。\n解法 按照题意模拟即可\nB - Hurdle Parsing 题意 有一个长度为 $N$ ( $N \\ge 1$ ) 的正整数序列 $A = (A_1, A_2, \\dots, A_N)$ 。\n她用 $A$ 生成了如下字符串 $S$ ：\n">
 <title>ABC380题解</title>
 
-<link rel='canonical' href='//localhost:1313//p/abc380%E9%A2%98%E8%A7%A3/'>
+<link rel='canonical' href='http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/'>
 
-<link rel="stylesheet" href="//scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="ABC380题解">
-<meta property='og:description' content="A - 123233 题意 给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。\n解法 暗照题意模拟即可\nB - Hurdle Parsing 题意 有一个长度为 $N$ ( $N \\ge 1$ ) 的正整数序列 $A = (A_1, A_2, \\dots, A_N)$ 。\n她用 $A$ 生成了如下字符串 $S$ ：\n">
-<meta property='og:url' content='//localhost:1313//p/abc380%E9%A2%98%E8%A7%A3/'>
-<meta property='og:site_name' content='FrictionalF-Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-18T13:36:16&#43;08:00'/><meta property='article:modified_time' content='2024-11-18T13:36:16&#43;08:00'/>
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="ABC380题解">
+<meta property='og:description' content="A - 123233 题意 给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。\n解法 按照题意模拟即可\nB - Hurdle Parsing 题意 有一个长度为 $N$ ( $N \\ge 1$ ) 的正整数序列 $A = (A_1, A_2, \\dots, A_N)$ 。\n她用 $A$ 生成了如下字符串 $S$ ：\n">
+<meta property='og:url' content='http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/'>
+<meta property='og:site_name' content='FrictionalF'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-18T13:36:16&#43;08:00'/><meta property='article:modified_time' content='2024-11-18T13:36:16&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/01.jpg' />
 <meta name="twitter:title" content="ABC380题解">
-<meta name="twitter:description" content="A - 123233 题意 给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。\n解法 暗照题意模拟即可\nB - Hurdle Parsing 题意 有一个长度为 $N$ ( $N \\ge 1$ ) 的正整数序列 $A = (A_1, A_2, \\dots, A_N)$ 。\n她用 $A$ 生成了如下字符串 $S$ ：\n">
+<meta name="twitter:description" content="A - 123233 题意 给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。\n解法 按照题意模拟即可\nB - Hurdle Parsing 题意 有一个长度为 $N$ ( $N \\ge 1$ ) 的正整数序列 $A = (A_1, A_2, \\dots, A_N)$ 。\n她用 $A$ 生成了如下字符串 $S$ ：\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/01.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -58,7 +59,7 @@
                     
                     
                         
-                        <img src="//img/ykq_hu657191036847409447.jpg" width="300"
+                        <img src="/img/ykq_hu657191036847409447.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -71,8 +72,8 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="//localhost:1313//">FrictionalF-Blog</a></h1>
-            <h2 class="site-description">人生如逆旅，我亦是行人。马上AFO的OIer。</h2>
+            <h1 class="site-name"><a href="/">FrictionalF</a></h1>
+            <h2 class="site-description"></h2>
         </div>
     </header><ol class="menu-social">
             
@@ -80,7 +81,7 @@
                     <a 
                         href='https://atcoder.jp/users/FrictionalF'
                         target="_blank"
-                        title="AtCoder"
+                        title="atcoder"
                         rel="me"
                     >
                         
@@ -106,7 +107,7 @@
             
                 <li>
                     <a 
-                        href='https://github.com/ht-dog'
+                        href='https://github.com/FrictionalF'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -120,7 +121,7 @@
 	 width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549" style="enable-background:new 0 0 438.549 438.549;"
 	 xml:space="preserve">
 <g>
-	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+	<path stroke="none" d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
 		c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
 		c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
 		c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
@@ -181,7 +182,7 @@
                     <a 
                         href='https://www.luogu.com.cn/user/798126'
                         target="_blank"
-                        title="Luogu"
+                        title="luogu"
                         rel="me"
                     >
                         
@@ -196,7 +197,7 @@
         
         
         <li >
-            <a href='//' >
+            <a href='/' >
                 
                 
                 
@@ -216,7 +217,7 @@
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
                 
                 
                 
@@ -229,7 +230,7 @@
 
 
                 
-                <span>关于</span>
+                <span>友链</span>
             </a>
         </li>
         
@@ -342,22 +343,32 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#题意">题意</a></li>
-    <li><a href="#解法">解法</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#题意-1">题意</a></li>
-    <li><a href="#解法-1">解法</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#题意-2">题意</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#题意-3">题意</a></li>
-    <li><a href="#解法-3">解法</a></li>
+    <li><a href="#a---123233">A - 123233</a>
+      <ol>
+        <li><a href="#题意">题意</a></li>
+        <li><a href="#解法">解法</a></li>
+      </ol>
+    </li>
+    <li><a href="#b---hurdle-parsing">B - Hurdle Parsing</a>
+      <ol>
+        <li><a href="#题意-1">题意</a></li>
+        <li><a href="#解法-1">解法</a></li>
+      </ol>
+    </li>
+    <li><a href="#c--">C -</a></li>
+    <li><a href="#d---strange-mirroring">D - Strange Mirroring</a>
+      <ol>
+        <li><a href="#题意-2">题意</a></li>
+        <li><a href="#解法-2">解法</a></li>
+      </ol>
+    </li>
+    <li><a href="#e---1d-bucket-tool">E - 1D Bucket Tool</a>
+      <ol>
+        <li><a href="#题意-3">题意</a></li>
+        <li><a href="#解法-3">解法</a></li>
+      </ol>
+    </li>
+    <li><a href="#code">Code</a></li>
   </ol>
 </nav>
         </div>
@@ -369,10 +380,34 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/abc380%E9%A2%98%E8%A7%A3/">
+                <img src="/p/abc380%E9%A2%98%E8%A7%A3/01_hu12922155662884764629.jpg"
+                        srcset="/p/abc380%E9%A2%98%E8%A7%A3/01_hu12922155662884764629.jpg 800w, /p/abc380%E9%A2%98%E8%A7%A3/01_hu9528503112543146894.jpg 1600w"
+                        width="800" 
+                        height="400" 
+                        loading="lazy"
+                        alt="Featured image of post ABC380题解" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%A2%98%E8%A7%A3/" >
+                题解
+            </a>
+        
+            <a href="/categories/abc/" >
+                ABC
+            </a>
+        
+    </header>
     
 
     <div class="article-title-wrapper">
@@ -404,6 +439,20 @@
         
 
         
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
     </footer>
     
 
@@ -415,15 +464,15 @@
     <section class="article-content">
     
     
-    <h1 id="a---123233">A - 123233
-</h1><h2 id="题意">题意
-</h2><p>给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。</p>
-<h2 id="解法">解法
-</h2><p>暗照题意模拟即可</p>
+    <h2 id="a---123233">A - 123233
+</h2><h3 id="题意">题意
+</h3><p>给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。</p>
+<h3 id="解法">解法
+</h3><p>按照题意模拟即可</p>
 <hr>
-<h1 id="b---hurdle-parsing">B - Hurdle Parsing
-</h1><h2 id="题意-1">题意
-</h2><p>有一个长度为 $N$ ( $N \ge 1$ ) 的正整数序列 $A = (A_1, A_2, \dots, A_N)$ 。<br>
+<h2 id="b---hurdle-parsing">B - Hurdle Parsing
+</h2><h3 id="题意-1">题意
+</h3><p>有一个长度为 $N$ ( $N \ge 1$ ) 的正整数序列 $A = (A_1, A_2, \dots, A_N)$ 。<br>
 她用 $A$ 生成了如下字符串 $S$ ：</p>
 <ul>
 <li>从 $S =$`| 开始。</li>
@@ -435,14 +484,14 @@
 </li>
 </ul>
 <p>根据生成的字符串 $S$ ，重建序列 $A$ 。</p>
-<h2 id="解法-1">解法
-</h2><p>根据题意模拟即可</p>
+<h3 id="解法-1">解法
+</h3><p>根据题意模拟即可</p>
 <hr>
-<h1 id="c--">C -
-</h1><hr>
-<h1 id="d---strange-mirroring">D - Strange Mirroring
-</h1><h2 id="题意-2">题意
-</h2><p>给你一个由大写和小写英文字母组成的字符串 $S$ 。</p>
+<h2 id="c--">C -
+</h2><hr>
+<h2 id="d---strange-mirroring">D - Strange Mirroring
+</h2><h3 id="题意-2">题意
+</h3><p>给你一个由大写和小写英文字母组成的字符串 $S$ 。</p>
 <p>我们对 $S$ 执行以下操作 $10^{100}$ 次：</p>
 <ul>
 <li>首先，将 $S$ 中的大写字母改为小写，小写字母改为大写，从而创建一个字符串 $T$ 。</li>
@@ -452,19 +501,19 @@
 <ul>
 <li>在完成所有运算后，找出 $S$ 开头的第 $K_i$ 个字符。</li>
 </ul>
-<h1 id="解法-2">解法
-</h1><p>找出是哪个字符很简单直接取模长度就好了。所以问题的关键就是确定字母的大小写。显然大小写只与这个字符是第几次出现有关。我们先将一些写出来，$1$ 代表原串，$0$ 代表大小写颠倒的原串。那就是 $ 1 0 0 1 0 1 1 0 $，可以发现这是一个很典的规律（据朋友所说），我们将第一次出现的下标设为 $0$，然后我们就可以发现一个字符大小写是否取反取决于它出现次数的下标的 $popcount$ 模 $2$ 的余数。（另外好像不能用 $__builtin_popcount()$，这个好像只能算 $int$ 范围内的数，我就是因为这个赛时怒调40min）</p>
+<h3 id="解法-2">解法
+</h3><p>找出是哪个字符很简单直接取模长度就好了。所以问题的关键就是确定字母的大小写。显然大小写只与这个字符是第几次出现有关。我们先将一些写出来，$1$ 代表原串，$0$ 代表大小写颠倒的原串。那就是 $ 1 0 0 1 0 1 1 0 $，可以发现这是一个很典的规律（据朋友所说），我们将第一次出现的下标设为 $0$，然后我们就可以发现一个字符大小写是否取反取决于它出现次数的下标的 $popcount$ 模 $2$ 的余数。（另外好像不能用 $__builtin_popcount()$，这个好像只能算 $int$ 范围内的数，我就是因为这个赛时怒调40min）</p>
 <hr>
-<h1 id="e---1d-bucket-tool">E - 1D Bucket Tool
-</h1><h2 id="题意-3">题意
-</h2><p>有一个长度为 $n$ 的序列，第 $i$ 个元素的颜色为 $i$。有两种操作，操作一是找到第 $x$ 个元素，将与他相邻的且颜色相同的元素的颜色都改成 $c$。操作二是查询颜色为 $c$ 的元素个数。</p>
-<h2 id="解法-3">解法
-</h2><p>这种合并的操作一看就很像并查集，但是我们要考虑怎么去维护。</p>
+<h2 id="e---1d-bucket-tool">E - 1D Bucket Tool
+</h2><h3 id="题意-3">题意
+</h3><p>有一个长度为 $n$ 的序列，第 $i$ 个元素的颜色为 $i$。有两种操作，操作一是找到第 $x$ 个元素，将与他相邻的且颜色相同的元素的颜色都改成 $c$。操作二是查询颜色为 $c$ 的元素个数。</p>
+<h3 id="解法-3">解法
+</h3><p>这种合并的操作一看就很像并查集，但是我们要考虑怎么去维护。</p>
 <p>首先看操作一，因为合并是区间合并，我们在更改完颜色后要判断是不是可以和左右区间合并，这我们就要维护区间左端点和右端点，每次将更改的颜色与左端点的前一个和右端点的后一个比较以下，同时显然肯定要记录一下这个并查集的颜色。</p>
 <p>再来看操作二，这就很简单了，我们维护完操作一，只需要维护并查集大小和每种颜色个数，每次修改时加上或减去就可以了。</p>
 <hr>
-<h1 id="code">Code
-</h1><p><a class="link" href="https://atcoder.jp/contests/abc380/submissions/59827121"  target="_blank" rel="noopener"
+<h2 id="code">Code
+</h2><p><a class="link" href="https://atcoder.jp/contests/abc380/submissions/59827121"  target="_blank" rel="noopener"
     >A - 123233</a></p>
 <p><a class="link" href="https://atcoder.jp/contests/abc380/submissions/59833362"  target="_blank" rel="noopener"
     >B - Hurdle Parsing</a></p>
@@ -481,6 +530,18 @@
     <footer class="article-footer">
     
 
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
     </footer>
 
 
@@ -514,6 +575,63 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05.1a51f0b6b6fd224a432c3468a7e93576_hu762497443700815249.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post P8112[Cnoi2021]符文破译题解"
+                        
+                        data-hash="md5-GlHwtrb9IkpDLDRop&#43;k1dg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">P8112[Cnoi2021]符文破译题解</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/abc257_f%E9%A2%98%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/abc257_f%E9%A2%98%E8%A7%A3/bj.c514d916917173a48a42e0114b469961_hu7626638945853200361.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ABC257_F题解"
+                        
+                        data-hash="md5-xRTZFpFxc6SKQuARS0aZYQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ABC257_F题解</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -566,10 +684,12 @@
     <section class="copyright">
         &copy; 
         
-        2024 FrictionalF
+        2024 Frictional-Blog
     </section>
     
     <section class="powerby">
+        
+            <font color="green" size="1"> 浮生如梦，要记住当下的灿烂呀，就因为它们会转瞬即逝。北斋的浪花、歌麿的花魁、广重的驿站、写乐的表情，这个光怪陆离的世界里。</font> <br/>
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
@@ -660,7 +780,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="//ts/main.fef1fb4160567fa89639769366fe86030ec57c6e6f414a8052c188e7b5665572.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.fef1fb4160567fa89639769366fe86030ec57c6e6f414a8052c188e7b5665572.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

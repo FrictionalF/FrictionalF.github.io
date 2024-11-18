@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><script src="//livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=/livereload" data-no-instant defer></script><meta charset='utf-8'>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一开始想从前向后做，发现好像贪心没有正确性（或许是我太菜了，没想到更好的贪心方法）。\n遂考虑从后向前做，我们发现如果 $S$ 从后向前有一个后缀向前扩一个后仍然是 $T$ 的前缀，那么就向前扩是更优的，且不会影响无解的情况。因为如果本来不扩是有解的，那扩完后，前面一个 $T$ 的前缀仍然是 $T$ 的前缀。这样我们就要求出来对于 $S$ 的每一个前缀的最长与 $T$ 的前缀相同的后缀。那这不就成了 KMP 的板子了。求出这个后就每次减掉一个满足条件的 $S$ 的最长后缀，至于无解不就是对于当前的 $S$，不存在一个后缀等于 $T$ 的某个前缀。\n">
 <title>P8112[Cnoi2021]符文破译题解</title>
 
-<link rel='canonical' href='//localhost:1313//p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/'>
+<link rel='canonical' href='http://localhost:1313/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/'>
 
-<link rel="stylesheet" href="//scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="P8112[Cnoi2021]符文破译题解">
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="P8112[Cnoi2021]符文破译题解">
 <meta property='og:description' content="一开始想从前向后做，发现好像贪心没有正确性（或许是我太菜了，没想到更好的贪心方法）。\n遂考虑从后向前做，我们发现如果 $S$ 从后向前有一个后缀向前扩一个后仍然是 $T$ 的前缀，那么就向前扩是更优的，且不会影响无解的情况。因为如果本来不扩是有解的，那扩完后，前面一个 $T$ 的前缀仍然是 $T$ 的前缀。这样我们就要求出来对于 $S$ 的每一个前缀的最长与 $T$ 的前缀相同的后缀。那这不就成了 KMP 的板子了。求出这个后就每次减掉一个满足条件的 $S$ 的最长后缀，至于无解不就是对于当前的 $S$，不存在一个后缀等于 $T$ 的某个前缀。\n">
-<meta property='og:url' content='//localhost:1313//p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/'>
-<meta property='og:site_name' content='FrictionalF-Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-17T22:03:05&#43;08:00'/><meta property='article:modified_time' content='2024-11-17T22:03:05&#43;08:00'/><meta property='og:image' content='//p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05.jpg' />
+<meta property='og:url' content='http://localhost:1313/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/'>
+<meta property='og:site_name' content='FrictionalF'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-17T22:03:05&#43;08:00'/><meta property='article:modified_time' content='2024-11-17T22:03:05&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05.jpg' />
 <meta name="twitter:title" content="P8112[Cnoi2021]符文破译题解">
 <meta name="twitter:description" content="一开始想从前向后做，发现好像贪心没有正确性（或许是我太菜了，没想到更好的贪心方法）。\n遂考虑从后向前做，我们发现如果 $S$ 从后向前有一个后缀向前扩一个后仍然是 $T$ 的前缀，那么就向前扩是更优的，且不会影响无解的情况。因为如果本来不扩是有解的，那扩完后，前面一个 $T$ 的前缀仍然是 $T$ 的前缀。这样我们就要求出来对于 $S$ 的每一个前缀的最长与 $T$ 的前缀相同的后缀。那这不就成了 KMP 的板子了。求出这个后就每次减掉一个满足条件的 $S$ 的最长后缀，至于无解不就是对于当前的 $S$，不存在一个后缀等于 $T$ 的某个前缀。\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='//p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05.jpg' />
+    <meta name="twitter:image" content='http://localhost:1313/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="//img/ykq_hu657191036847409447.jpg" width="300"
+                        <img src="/img/ykq_hu657191036847409447.jpg" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -72,8 +72,8 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="//localhost:1313//">FrictionalF-Blog</a></h1>
-            <h2 class="site-description">人生如逆旅，我亦是行人。马上AFO的OIer。</h2>
+            <h1 class="site-name"><a href="/">FrictionalF</a></h1>
+            <h2 class="site-description"></h2>
         </div>
     </header><ol class="menu-social">
             
@@ -81,7 +81,7 @@
                     <a 
                         href='https://atcoder.jp/users/FrictionalF'
                         target="_blank"
-                        title="AtCoder"
+                        title="atcoder"
                         rel="me"
                     >
                         
@@ -107,7 +107,7 @@
             
                 <li>
                     <a 
-                        href='https://github.com/ht-dog'
+                        href='https://github.com/FrictionalF'
                         target="_blank"
                         title="GitHub"
                         rel="me"
@@ -121,7 +121,7 @@
 	 width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549" style="enable-background:new 0 0 438.549 438.549;"
 	 xml:space="preserve">
 <g>
-	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+	<path stroke="none" d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
 		c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
 		c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
 		c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
@@ -182,7 +182,7 @@
                     <a 
                         href='https://www.luogu.com.cn/user/798126'
                         target="_blank"
-                        title="Luogu"
+                        title="luogu"
                         rel="me"
                     >
                         
@@ -197,7 +197,7 @@
         
         
         <li >
-            <a href='//' >
+            <a href='/' >
                 
                 
                 
@@ -217,7 +217,7 @@
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
                 
                 
                 
@@ -230,7 +230,7 @@
 
 
                 
-                <span>关于</span>
+                <span>友链</span>
             </a>
         </li>
         
@@ -328,8 +328,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/">
-                <img src="//p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05_hu1557249966772308782.jpg"
-                        srcset="//p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05_hu1557249966772308782.jpg 800w, //p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05_hu14133719454624014945.jpg 1600w"
+                <img src="/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05_hu1557249966772308782.jpg"
+                        srcset="/p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05_hu1557249966772308782.jpg 800w, /p/p8112cnoi2021%E7%AC%A6%E6%96%87%E7%A0%B4%E8%AF%91%E9%A2%98%E8%A7%A3/05_hu14133719454624014945.jpg 1600w"
                         width="800" 
                         height="335" 
                         loading="lazy"
@@ -378,6 +378,20 @@
             </div>
         
 
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
         
     </footer>
     
@@ -556,6 +570,18 @@
     <footer class="article-footer">
     
 
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
     </footer>
 
 
@@ -597,11 +623,35 @@
             
                 
 <article class="has-image">
+    <a href="/p/abc380%E9%A2%98%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/abc380%E9%A2%98%E8%A7%A3/01.1652e5a89c5bb1945d76a5e875d77c12_hu8390532491515355064.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ABC380题解"
+                        
+                        data-hash="md5-FlLlqJxbsZRddqXoddd8Eg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ABC380题解</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/p/abc257_f%E9%A2%98%E8%A7%A3/">
         
         
             <div class="article-image">
-                <img src="//p/abc257_f%E9%A2%98%E8%A7%A3/bj.c514d916917173a48a42e0114b469961_hu7626638945853200361.jpg" 
+                <img src="/p/abc257_f%E9%A2%98%E8%A7%A3/bj.c514d916917173a48a42e0114b469961_hu7626638945853200361.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -674,10 +724,12 @@
     <section class="copyright">
         &copy; 
         
-        2024 FrictionalF
+        2024 Frictional-Blog
     </section>
     
     <section class="powerby">
+        
+            <font color="green" size="1"> 浮生如梦，要记住当下的灿烂呀，就因为它们会转瞬即逝。北斋的浪花、歌麿的花魁、广重的驿站、写乐的表情，这个光怪陆离的世界里。</font> <br/>
         使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
@@ -768,7 +820,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="//ts/main.fef1fb4160567fa89639769366fe86030ec57c6e6f414a8052c188e7b5665572.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.fef1fb4160567fa89639769366fe86030ec57c6e6f414a8052c188e7b5665572.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
