@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>ABC on FrictionalF</title>
-        <link>http://localhost:1313/categories/abc/</link>
+        <link>https://FrictionalF.github.io/categories/abc/</link>
         <description>Recent content in ABC on FrictionalF</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Frictional-Blog</copyright>
-        <lastBuildDate>Mon, 18 Nov 2024 13:36:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/abc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 18 Nov 2024 13:36:16 +0800</lastBuildDate><atom:link href="https://FrictionalF.github.io/categories/abc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>ABC380题解</title>
-        <link>http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/</link>
+        <link>https://FrictionalF.github.io/p/abc380%E9%A2%98%E8%A7%A3/</link>
         <pubDate>Mon, 18 Nov 2024 13:36:16 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/</guid>
-        <description>&lt;img src="http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/01.jpg" alt="Featured image of post ABC380题解" /&gt;&lt;h2 id=&#34;a---123233&#34;&gt;A - 123233
+        <guid>https://FrictionalF.github.io/p/abc380%E9%A2%98%E8%A7%A3/</guid>
+        <description>&lt;img src="https://FrictionalF.github.io/p/abc380%E9%A2%98%E8%A7%A3/01.jpg" alt="Featured image of post ABC380题解" /&gt;&lt;h2 id=&#34;a---123233&#34;&gt;A - 123233
 &lt;/h2&gt;&lt;h3 id=&#34;题意&#34;&gt;题意
 &lt;/h3&gt;&lt;p&gt;给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。&lt;/p&gt;
 &lt;h3 id=&#34;解法&#34;&gt;解法
