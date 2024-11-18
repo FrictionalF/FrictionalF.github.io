@@ -13,15 +13,15 @@
         <pubDate>Mon, 18 Nov 2024 13:36:16 +0800</pubDate>
         
         <guid>http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/</guid>
-        <description>&lt;img src="http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/01.jpg" alt="Featured image of post ABC380题解" /&gt;&lt;h1 id=&#34;a---123233&#34;&gt;A - 123233
-&lt;/h1&gt;&lt;h2 id=&#34;题意&#34;&gt;题意
-&lt;/h2&gt;&lt;p&gt;给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。&lt;/p&gt;
-&lt;h2 id=&#34;解法&#34;&gt;解法
-&lt;/h2&gt;&lt;p&gt;暗照题意模拟即可&lt;/p&gt;
+        <description>&lt;img src="http://localhost:1313/p/abc380%E9%A2%98%E8%A7%A3/01.jpg" alt="Featured image of post ABC380题解" /&gt;&lt;h2 id=&#34;a---123233&#34;&gt;A - 123233
+&lt;/h2&gt;&lt;h3 id=&#34;题意&#34;&gt;题意
+&lt;/h3&gt;&lt;p&gt;给出一个长度为 6 的字符串，判断是否恰好有 1 个 1，2 个 2，3 个 3。&lt;/p&gt;
+&lt;h3 id=&#34;解法&#34;&gt;解法
+&lt;/h3&gt;&lt;p&gt;按照题意模拟即可&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&#34;b---hurdle-parsing&#34;&gt;B - Hurdle Parsing
-&lt;/h1&gt;&lt;h2 id=&#34;题意-1&#34;&gt;题意
-&lt;/h2&gt;&lt;p&gt;有一个长度为 $N$ ( $N \ge 1$ ) 的正整数序列 $A = (A_1, A_2, \dots, A_N)$ 。&lt;br&gt;
+&lt;h2 id=&#34;b---hurdle-parsing&#34;&gt;B - Hurdle Parsing
+&lt;/h2&gt;&lt;h3 id=&#34;题意-1&#34;&gt;题意
+&lt;/h3&gt;&lt;p&gt;有一个长度为 $N$ ( $N \ge 1$ ) 的正整数序列 $A = (A_1, A_2, \dots, A_N)$ 。&lt;br&gt;
 她用 $A$ 生成了如下字符串 $S$ ：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;从 $S =$`| 开始。&lt;/li&gt;
@@ -33,14 +33,14 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;根据生成的字符串 $S$ ，重建序列 $A$ 。&lt;/p&gt;
-&lt;h2 id=&#34;解法-1&#34;&gt;解法
-&lt;/h2&gt;&lt;p&gt;根据题意模拟即可&lt;/p&gt;
+&lt;h3 id=&#34;解法-1&#34;&gt;解法
+&lt;/h3&gt;&lt;p&gt;根据题意模拟即可&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&#34;c--&#34;&gt;C -
-&lt;/h1&gt;&lt;hr&gt;
-&lt;h1 id=&#34;d---strange-mirroring&#34;&gt;D - Strange Mirroring
-&lt;/h1&gt;&lt;h2 id=&#34;题意-2&#34;&gt;题意
-&lt;/h2&gt;&lt;p&gt;给你一个由大写和小写英文字母组成的字符串 $S$ 。&lt;/p&gt;
+&lt;h2 id=&#34;c--&#34;&gt;C -
+&lt;/h2&gt;&lt;hr&gt;
+&lt;h2 id=&#34;d---strange-mirroring&#34;&gt;D - Strange Mirroring
+&lt;/h2&gt;&lt;h3 id=&#34;题意-2&#34;&gt;题意
+&lt;/h3&gt;&lt;p&gt;给你一个由大写和小写英文字母组成的字符串 $S$ 。&lt;/p&gt;
 &lt;p&gt;我们对 $S$ 执行以下操作 $10^{100}$ 次：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;首先，将 $S$ 中的大写字母改为小写，小写字母改为大写，从而创建一个字符串 $T$ 。&lt;/li&gt;
@@ -50,19 +50,19 @@
 &lt;ul&gt;
 &lt;li&gt;在完成所有运算后，找出 $S$ 开头的第 $K_i$ 个字符。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;解法-2&#34;&gt;解法
-&lt;/h1&gt;&lt;p&gt;找出是哪个字符很简单直接取模长度就好了。所以问题的关键就是确定字母的大小写。显然大小写只与这个字符是第几次出现有关。我们先将一些写出来，$1$ 代表原串，$0$ 代表大小写颠倒的原串。那就是 $ 1 0 0 1 0 1 1 0 $，可以发现这是一个很典的规律（据朋友所说），我们将第一次出现的下标设为 $0$，然后我们就可以发现一个字符大小写是否取反取决于它出现次数的下标的 $popcount$ 模 $2$ 的余数。（另外好像不能用 $__builtin_popcount()$，这个好像只能算 $int$ 范围内的数，我就是因为这个赛时怒调40min）&lt;/p&gt;
+&lt;h3 id=&#34;解法-2&#34;&gt;解法
+&lt;/h3&gt;&lt;p&gt;找出是哪个字符很简单直接取模长度就好了。所以问题的关键就是确定字母的大小写。显然大小写只与这个字符是第几次出现有关。我们先将一些写出来，$1$ 代表原串，$0$ 代表大小写颠倒的原串。那就是 $ 1 0 0 1 0 1 1 0 $，可以发现这是一个很典的规律（据朋友所说），我们将第一次出现的下标设为 $0$，然后我们就可以发现一个字符大小写是否取反取决于它出现次数的下标的 $popcount$ 模 $2$ 的余数。（另外好像不能用 $__builtin_popcount()$，这个好像只能算 $int$ 范围内的数，我就是因为这个赛时怒调40min）&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&#34;e---1d-bucket-tool&#34;&gt;E - 1D Bucket Tool
-&lt;/h1&gt;&lt;h2 id=&#34;题意-3&#34;&gt;题意
-&lt;/h2&gt;&lt;p&gt;有一个长度为 $n$ 的序列，第 $i$ 个元素的颜色为 $i$。有两种操作，操作一是找到第 $x$ 个元素，将与他相邻的且颜色相同的元素的颜色都改成 $c$。操作二是查询颜色为 $c$ 的元素个数。&lt;/p&gt;
-&lt;h2 id=&#34;解法-3&#34;&gt;解法
-&lt;/h2&gt;&lt;p&gt;这种合并的操作一看就很像并查集，但是我们要考虑怎么去维护。&lt;/p&gt;
+&lt;h2 id=&#34;e---1d-bucket-tool&#34;&gt;E - 1D Bucket Tool
+&lt;/h2&gt;&lt;h3 id=&#34;题意-3&#34;&gt;题意
+&lt;/h3&gt;&lt;p&gt;有一个长度为 $n$ 的序列，第 $i$ 个元素的颜色为 $i$。有两种操作，操作一是找到第 $x$ 个元素，将与他相邻的且颜色相同的元素的颜色都改成 $c$。操作二是查询颜色为 $c$ 的元素个数。&lt;/p&gt;
+&lt;h3 id=&#34;解法-3&#34;&gt;解法
+&lt;/h3&gt;&lt;p&gt;这种合并的操作一看就很像并查集，但是我们要考虑怎么去维护。&lt;/p&gt;
 &lt;p&gt;首先看操作一，因为合并是区间合并，我们在更改完颜色后要判断是不是可以和左右区间合并，这我们就要维护区间左端点和右端点，每次将更改的颜色与左端点的前一个和右端点的后一个比较以下，同时显然肯定要记录一下这个并查集的颜色。&lt;/p&gt;
 &lt;p&gt;再来看操作二，这就很简单了，我们维护完操作一，只需要维护并查集大小和每种颜色个数，每次修改时加上或减去就可以了。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h1 id=&#34;code&#34;&gt;Code
-&lt;/h1&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://atcoder.jp/contests/abc380/submissions/59827121&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h2 id=&#34;code&#34;&gt;Code
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://atcoder.jp/contests/abc380/submissions/59827121&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;A - 123233&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://atcoder.jp/contests/abc380/submissions/59833362&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;B - Hurdle Parsing&lt;/a&gt;&lt;/p&gt;
