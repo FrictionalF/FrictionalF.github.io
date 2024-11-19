@@ -689,7 +689,23 @@ $$\sum\limits_{d=1}^{min(n,m)}\left\lfloor \frac{n}{d}\right\rfloor\left\lfloor 
         <pubDate>Sun, 17 Nov 2024 20:08:03 +0800</pubDate>
         
         <guid>http://localhost:1313/p/hello/</guid>
-        <description>&lt;p&gt;终于弄好 Blog 了，虽然自己什么代码也没写，但是也是捣鼓了一整天。以后会发一些好东西的！&lt;/p&gt;
+        <description>&lt;p&gt;测试文章上传和显示&lt;/p&gt;
+&lt;p&gt;测试测试语言显示&lt;/p&gt;
+&lt;p&gt;测试图片显示
+&lt;img src=&#34;http://localhost:1313/p/hello/man.jpg&#34;
+	width=&#34;270&#34;
+	height=&#34;360&#34;
+	srcset=&#34;http://localhost:1313/p/hello/man_hu12128306865331716874.jpg 480w, http://localhost:1313/p/hello/man_hu6079441761118739479.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ykq&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;75&#34;
+		data-flex-basis=&#34;180px&#34;
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         
