@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>测试 on FrictionalF</title>
-        <link>https://FrictionalF.github.io/categories/%E6%B5%8B%E8%AF%95/</link>
+        <link>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</link>
         <description>Recent content in 测试 on FrictionalF</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Frictional-Blog</copyright>
-        <lastBuildDate>Sun, 17 Nov 2024 20:08:03 +0800</lastBuildDate><atom:link href="https://FrictionalF.github.io/categories/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 17 Nov 2024 20:08:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hello</title>
-        <link>https://FrictionalF.github.io/p/hello/</link>
+        <link>http://localhost:1313/p/hello/</link>
         <pubDate>Sun, 17 Nov 2024 20:08:03 +0800</pubDate>
         
-        <guid>https://FrictionalF.github.io/p/hello/</guid>
+        <guid>http://localhost:1313/p/hello/</guid>
         <description>&lt;p&gt;终于弄好 Blog 了，虽然自己什么代码也没写，但是也是捣鼓了一整天。以后会发一些好东西的！&lt;/p&gt;
 </description>
         </item>
