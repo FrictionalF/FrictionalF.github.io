@@ -458,8 +458,8 @@
 &lt;li&gt;$\mathrm{Id}_k(n)=n^k，通常 \mathrm{Id}_1(n)记为\mathrm{Id}(n)$&lt;/li&gt;
 &lt;li&gt;$d(n)=\sum\limits_{d|n}1$ 即 $n$ 的因数个数&lt;/li&gt;
 &lt;li&gt;$\sigma_k(n)=\sum\limits_{d|n}{d^k}$
-$\quad \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$ 特别的，$k=0$ 时，为因子个数，即 $d(n)$
-$\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$ $\quad \quad \ \ $，$ k=1$ 时，为因子和，通常记为 $\sigma(n)$&lt;/li&gt;
+&lt;br&gt; 特别的，$k=0$ 时，为因子个数，即 $d(n)$
+&lt;br&gt;$\quad \quad\ \ $，$ k=1$ 时，为因子和，通常记为 $\sigma(n)$&lt;/li&gt;
 &lt;li&gt;欧拉函数 $\varphi(n)=\sum\limits_{i=1}^n\left[\gcd(i,n)=1\right]$&lt;/li&gt;
 &lt;li&gt;莫比乌斯函数 &lt;del&gt;下面有定义&lt;/del&gt;&lt;/li&gt;
 &lt;/ol&gt;
